@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Language Translator</title>
+    <link rel="stylesheet" type="text/css" href="Style.css">
+</head>
+<body>
+    <h1>Welcome To Language Tanslator</h1>
+    <div class = "main">
+        <div class = "d1">
+            <h2>
+                From:
+                <select>
+                    <option>English</option>
+                </select>
+            </h2>
+            <textarea id="inputField" rows="5" cols="30" placeholder="Enter Text" onkeyup="translation()"></textarea>
+        </div>
+
+        <div>
+            <img src="chatbot.gif" alt="cartoon robot">
+        </div>
+
+        <div class = "d2">
+            <h2>
+                To:
+                <select id="languageSelector" onchange="translation()">
+                    <option type = text value="0">Afrikaans</option>
+                    <option type = text value="1">Albanian</option>
+                    <option type = text value="2">Bangla</option>
+                    <option type = text value="3">Bulgarian</option>
+                    <option type = text value="4">Danish</option>
+                    <option type = text value="5">Dutch</option>
+                    <option type = text value="6">French</option>
+                    <option type = text value="7">Galician</option>
+                    <option type = text value="8">German</option>
+                    <option type = text value="9">Greek</option>
+                    <option type = text value="10">Gujarati</option>
+                    <option type = text value="11">Hindi</option>
+                    <option type = text value="12">Hungarian</option>
+                    <option type = text value="13">Indonesian</option>
+                    <option type = text value="14">Irish</option>
+                    <option type = text value="15">Italian</option>
+                    <option type = text value="16">Japanese</option>
+                    <option type = text value="17">Kannada</option>
+                    <option type = text value="18">Korean</option>
+                    <option type = text value="19">Latin</option>
+                    <option type = text value="20">Polish</option>
+                    <option type = text value="21">Portuguese</option>
+                    <option type = text value="22">Russian</option>
+                    <option type = text value="23">Serbian</option>
+                    <option type = text value="24">Spanish</option>
+                    <option type = text value="25">Swedish</option>
+                    <option type = text value="26">Tamil</option>
+                    <option type = text value="27">Telugu</option>
+                    <option type = text value="28">Turkish</option>
+                    <option type = text value="29">Ukrainian</option>
+                    <option type = text value="30">Uzbek</option>
+                    <option type = text value="31">Vietnamese</option>
+                    <option type = text value="32">Welsh</option>
+                    <option type = text value="33">Yoruba</option>
+                    <option type = text value="34">Zulu</option>
+                </select>
+            </h2>
+            <textarea id="outputField" placeholder="Translation" rows="5" cols="30" disabled></textarea> 
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function translation() {
+        var input = document.getElementById('inputField').value;
+        var output = document.getElementById('outputField');
+        var selectedLanguage = document.getElementById('languageSelector').value;
+        input = input.toLowerCase();
+        const en = [
+            "hii", "hey", "hello", "thank you", "what is your name", "who are you", "your name please", "good morning", "good afternoon", "good night",  "bye", "welcome", "how are you", "say something", "i am fine", "i don't know", "i love you", "please", "goodbye", "see you later", "tell me a joke", "why not", "where are you from", "okay", "yes", "nice", "ok", "good", "happy"
+            ];
+
+        const dictonary = [
+            ["Hi ek", "hey", "hallo", "dankie", "wat is jou naam", "wie is jy", "jou naam asseblief", "goeie môre", "goeie middag", "goeie nag ", "totsiens", "welkom", "hoe gaan dit", "sê iets", "dit gaan goed met my", "ek weet nie", "ek is lief vir jou", "asseblief", "totsiens", " sien jou later", "vertel vir my 'n grap", "hoekom nie", "waar kom jy vandaan", "okay", "ja", "mooi", "ok", "goed", "gelukkig"],
+            ["hii", "hej", "përshëndetje", "faleminderit", "si e ke emrin", "kush je", "emri yt të lutem", "mirëmëngjes", "mirëmëngjes", "natën e mirë", "mirupafshim", "mirë se erdhët", "si jeni", "thoni diçka", "jam mirë", "nuk e di", "të dua", "të lutem", "lamtumirë", " shihemi më vonë", "më thuaj një shaka", "pse jo", "nga je", "mirë", "po", "mirë", "ok", "mirë", "lumtur"],
+            ["হাই", "হেই", "হ্যালো", "ধন্যবাদ", "আপনার নাম কি", "কে আপনি", "আপনার নাম দয়া করে", "শুভ সকাল", "শুভ বিকেল", "শুভ রাত্রি", "বিদায়", "স্বাগত", "কেমন আছেন", "কিছু বলুন", "আমি ভালো আছি", "জানি না", "আমি তোমাকে ভালোবাসি", "দয়া করে", "বিদায়", "পরে দেখা হবে", "আমাকে একটা কৌতুক বলুন", "কেন না", "আপনি কোথা থেকে এসেছেন", "ঠিক আছে", "হ্যাঁ", "ভালো", "ঠিক আছে", "ভালো", "খুশি"],
+            ["здравей", "хей", "здравей", "благодаря", "как се казваш", "кой си", "името ти, моля", "добро утро", "добър ден", "лека нощ ", "чао", "добре дошли", "как си", "кажи нещо", "добре съм", "не знам", "обичам те", "моля", "сбогом", " ще се видим по-късно", "разкажи ми виц", "защо не", "откъде си", "добре", "да", "хубаво", "добре", "добре", "щастлив"],
+            ["hej", "hej", "hej", "tak", "hvad er dit navn", "hvem er du", "dit navn venligst", "godmorgen", "god eftermiddag", "godnat ", "farvel", "velkommen", "hvordan har du det", "sig noget", "jeg har det fint", "jeg ved det ikke", "jeg elsker dig", "venligst", "farvel", " vi ses senere", "fortæl mig en vittighed", "hvorfor ikke", "hvor kommer du fra", "okay", "ja", "godt", "ok", "godt", "glad"],
+            ["hoi", "hey", "hallo", "dank u", "hoe heet u", "wie bent u", "uw naam alstublieft", "goedemorgen", "goede middag", "welterusten ", "dag", "welkom", "hoe gaat het", "zeg iets", "het gaat goed", "ik weet het niet", "ik hou van je", "alsjeblieft", "tot ziens", " tot later", "vertel me een grapje", "waarom niet", "waar kom je vandaan", "oké", "ja", "leuk", "ok", "goed", "gelukkig"],
+            ["salut", "Hé", "bonjour", "merci", "comment vous appelez-vous", "qui êtes-vous", "votre nom s'il vous plaît", "bonjour", "bon après-midi", "bonne nuit ", "au revoir", "bienvenue", "comment vas-tu", "dis quelque chose", "je vais bien", "je ne sais pas", "je t'aime", "s'il te plaît", "au revoir", " à plus tard", "raconte-moi une blague", "pourquoi pas", "d'où viens-tu", "d'accord", "oui", "sympa", "d'accord", "bien", "heureux"],
+            ["ola", "ola", "ola", "grazas", "como te chamas", "quen es ti", "o teu nome, por favor", "bos días", "boas tardes", "boas noites", "adeus", "benvido", "como estás", "di algo", "estou ben", "non sei", "quérote", "por favor", "adeus", " vémonos despois", "cóntame unha broma", "por que non", "de onde eres", "ben", "si", "bonito", "ok", "ben", "feliz"],
+            ["Hallo ich", "Hey", "hallo", "danke", "wie heißt du", "wer bist du", "deinen Namen bitte", "Guten Morgen", "Guten Tag", "Gute Nacht ", "Tschüss", "Willkommen", "Wie geht es dir", "Sag etwas", "Mir geht es gut", "Ich weiß nicht", "Ich liebe dich", "Bitte", "Auf Wiedersehen", " bis später", "erzähl mir einen Witz", "warum nicht", "woher kommst du", "okay", "ja", "nett", "ok", "gut", "glücklich"],
+            ["γεια", "γεια σου", "γεια σου", "ευχαριστώ", "πώς σε λένε", "ποιος είσαι", "το όνομά σου παρακαλώ", "καλημέρα", "καλημέρα", "καληνύχτα", "αντίο", "καλώς ήρθες", "πώς είσαι", "πες κάτι", "είμαι καλά", "δεν ξέρω", "σ' αγαπώ", "παρακαλώ", "αντίο", " τα λέμε αργότερα", "πες μου ένα αστείο", "γιατί όχι", "από πού είσαι", "εντάξει", "ναι", "ωραία", "εντάξει", "καλά", "ευτυχισμένα"],
+            ["હાય", "અરે", "નમસ્તે", "આભાર", "તમારું નામ શું છે", "તમે કોણ છો", "તમારું નામ કૃપા કરીને", "શુભ સવાર", "શુભ બપોર", "શુભ રાત્રિ"," બાય", "સ્વાગત", "કેમ છો", "કંઈક કહો", "હું ઠીક છું", "મને ખબર નથી", "હું તને પ્રેમ કરું છું", "કૃપા કરીને", "ગુડબાય", "પછી મળીશું", "મને એક મજાક કહો", "કેમ નથી", "તમે ક્યાંથી છો", "ઓકે", "હા", "સરસ", "ઠીક", "સારું", "ખુશ"],
+            ["हाय", "हे", "हैलो", "धन्यवाद", "आपका नाम क्या है", "आप कौन हैं", "आपका नाम कृपया", "सुप्रभात", "शुभ दोपहर", "शुभ रात्रि", "अलविदा", "स्वागत", "आप कैसे हैं", "कुछ कहो", "मैं ठीक हूँ", "मैं नहीं जानता", "मैं तुमसे प्यार करता हूँ", "कृपया", "अलविदा", " बाद में मिलते हैं", "मुझे एक चुटकुला सुनाएं", "क्यों नहीं", "आप कहां से हैं", "ठीक है", "हां", "अच्छा", "ठीक है", "अच्छा", "खुश"],
+            ["szia", "hé", "szia", "köszönöm", "hogy hívnak", "ki vagy", "a neved kérlek", "jó reggelt", "jó napot", "jó éjszakát", "viszlát", "üdvözlöm", "hogy vagy", "mondj valamit", "jól vagyok", "nem tudom", "szeretlek", "kérlek", "viszlát", " találkozunk", "mondj egy viccet", "miért ne", "honnan jöttél", "oké", "igen", "szép", "oké", "jó", "boldog"],
+            ["hai", "hei", "halo", "terima kasih", "siapa namamu", "siapa kamu", "namamu tolong", "selamat pagi", "selamat siang", "selamat malam ", "bye", "selamat datang", "apa kabar", "katakan sesuatu", "Aku baik-baik saja", "aku tidak tahu", "aku mencintaimu", "tolong", "selamat tinggal", " sampai jumpa", "ceritakan lelucon", "kenapa tidak", "dari mana", "oke", "ya", "baik", "oke", "baik", "senang"],
+            ["hii", "haigh", "Dia dhuit", "go raibh maith agat", "cad is ainm duit", "cé thusa", "d'ainm le do thoil", "maidin mhaith", "tráthnóna mhaith", "oíche mhaith ", "beannacht", "fáilte", "conas atá tú", "abair rud éigin", "Tá mé go maith", "níl a fhios agam", "is breá liom tú", "le do thoil", "beannacht", " fheiceann tú níos déanaí", "inis a joke", "cén fáth nach", "cá bhfuil tú as", "ceart go leor", "tá", "deas", "ceart go leor", "go maith", "sásta"],
+            ["ciao", "ehi", "ciao", "grazie", "come ti chiami", "chi sei", "il tuo nome per favore", "buongiorno", "buon pomeriggio", "buona notte ", "ciao", "benvenuto", "come stai", "dì qualcosa", "sto bene", "non lo so", "ti amo", "per favore", "arrivederci", " a dopo", "raccontami una barzelletta", "perché no", "da dove vieni", "okay", "yes", "bello", "ok", "good", "felice"],
+            ["hii", "おい", "こんにちは", "ありがとうございます", "名前はなんですか", "あなたは誰", "お名前は", "おはよう", "おはよう", "おやすみなさい", "さようなら", "ようこそ", "お元気ですか", "何か言って", "元気です", "わからない", "愛してる", "お願いします", "さようなら", "またね", "冗談を言って", "どうして", "どこから来たの", "大丈夫", "はい", "いい", "大丈夫", "良い", "ハッピー"],
+            ["ಹಾಯ್", "ಹೇ", "ಹಲೋ", "ಧನ್ಯವಾದಗಳು", "ನಿಮ್ಮ ಹೆಸರೇನು", "ನೀವು ಯಾರು", "ನಿಮ್ಮ ಹೆಸರು ದಯವಿಟ್ಟು", "ಶುಭೋದಯ", "ಶುಭ ಮಧ್ಯಾಹ್ನ", "ಶುಭ ರಾತ್ರಿ", "ಬೈ", "ಸ್ವಾಗತ", "ನೀವು ಹೇಗಿದ್ದೀರಿ", "ಏನಾದರೂ ಹೇಳು", "ನಾನು ಚೆನ್ನಾಗಿದ್ದೇನೆ", "ನನಗೆ ಗೊತ್ತಿಲ್ಲ", "ನಾನು ನಿನ್ನನ್ನು ಪ್ರೀತಿಸುತ್ತೇನೆ", "ದಯವಿಟ್ಟು", "ವಿದಾಯ", " ನಂತರ ನೋಡೋಣ", "ನನಗೆ ಒಂದು ಜೋಕ್ ಹೇಳು", "ಯಾಕೆ ಇಲ್ಲ", "ನೀವು ಎಲ್ಲಿಂದ ಬಂದಿದ್ದೀರಿ", "ಸರಿ", "ಹೌದು", "ಚೆನ್ನಾಗಿದೆ", "ಸರಿ", "ಒಳ್ಳೆಯದು", "ಸಂತೋಷ"],
+            ["안녕", "안녕", "안녕하세요", "고마워요", "이름이 뭐예요", "누구세요", "이름을 알려주세요", "좋은 아침", "안녕하세요", "안녕히 주무세요", "안녕", "어서와", "안녕", "말 한마디", "괜찮아", "모르겠어", "사랑해", "제발", "안녕", " 나중에 보자", "장난 좀 해봐", "왜 안 돼", "어디서 왔니", "알았어", "네", "좋았어", "알았어", "좋았어", "행복"],
+            [" hii", "heus", "salve", "gratias tibi", "quod nomen tuum", "quis es", "nomen tuum amabo", "Salve", "salve", "bonum noctis ", "vale", "grave", "quam vales", "aliquid dic", "sum bene", "non scio", "te amo", "placet", "vale", " vide te postea", "dic iocum", "cur non", "unde tu es", "bene", "sic", "lepidus", "ok", "bonus", "beatus"],
+            ["cześć", "hej", "cześć", "dziękuję", "jak masz na imię", "kim jesteś", "proszę o imię", "dzień dobry", "dzień dobry", "dobranoc ", "cześć", "witaj", "jak się masz", "powiedz coś", "w porządku", "nie wiem", "kocham cię", "proszę", "do widzenia", " do zobaczenia później", "opowiedz mi dowcip", "dlaczego nie", "skąd jesteś", "w porządku", "tak", "ładnie", "w porządku", "dobrze", "szczęśliwy"],
+            ["Olá eu", "Ei", "olá", "obrigado", "qual é o seu nome", "quem é você", "seu nome por favor", "bom dia", "boa tarde", "boa noite", "tchau", "bem-vindo", "como vai", "diga alguma coisa", "estou bem", "não sei", "eu te amo", "por favor", "adeus", " vejo você mais tarde", "me conte uma piada", "por que não", "de onde você é", "ok", "sim", "legal", "ok", "bom", "feliz"],
+            ["привет", "привет", "привет", "спасибо", "как тебя зовут", "кто ты", "ваше имя, пожалуйста", "доброе утро", "добрый день", "спокойной ночи", "пока", "добро пожаловать", "как дела", "скажи что-нибудь", "я в порядке", "я не знаю", "я люблю тебя", "пожалуйста", "до свидания", " увидимся позже", "расскажи мне анекдот", "почему бы и нет", "откуда ты", "хорошо", "да", "хорошо", "хорошо", "хорошо", "счастливо"],
+            ["здраво", "хеј", "здраво", "хвала", "како се зовеш", "ко си ти", "ваше име молим те", "добро јутро", "добар дан", "лаку ноћ", "ћао", "добродошли", "како си", "реци нешто", "добро сам", "не знам", "волим те", "молим те", "збогом", " видимо се касније", "причај ми виц", "зашто не", "одакле си", "добро", "да", "лепо", "ок", "добро", "срећно"],
+            ["hola", "hola", "hola", "gracias", "cómo te llamas", "quién eres", "tu nombre por favor", "buenos días", "buenas tardes", "buenas noches", "adiós", "bienvenido", "cómo estás", "di algo", "estoy bien", "no sé", "te amo", "por favor", "adiós", " hasta luego", "cuéntame un chiste", "por qué no", "de dónde eres", "bien", "sí", "bien", "bien", "bien", "feliz"],
+            ["hej", "hej", "hej", "tack", "vad heter du", "vem är du", "ditt namn snälla", "god morgon", "god eftermiddag", "god natt", "hejdå", "välkommen", "hur mår du", "säg något", "jag mår bra", "jag vet inte", "jag älskar dig", "snälla", "hejdå", " vi ses senare", "berätta ett skämt", "varför inte", "var kommer du ifrån", "okej", "ja", "trevligt", "ok", "bra", "glad"],
+            ["hii", "ஏய்", "வணக்கம்", "நன்றி", "உங்கள் பெயர் என்ன", "நீங்கள் யார்", "உங்கள் பெயர் தயவுசெய்து", "காலை வணக்கம்", "நல்ல மதியம்", "நல்ல இரவு", "பை", "வரவேற்கிறேன்", "எப்படி இருக்கிறீர்கள்", "ஏதாவது சொல்லுங்கள்", "நான் நன்றாக இருக்கிறேன்", "எனக்குத் தெரியாது", "நான் உன்னை காதலிக்கிறேன்", "தயவுசெய்து", "குட்பை", " பிறகு சந்திப்போம்", "ஒரு ஜோக் சொல்லுங்கள்", "ஏன் இல்லை", "நீங்கள் எங்கிருந்து வருகிறீர்கள்", "சரி", "ஆம்", "நல்லது", "சரி", "நல்லது", "மகிழ்ச்சி"],
+            ["హాయ్", "హే", "హలో", "ధన్యవాదాలు", "మీ పేరు ఏమిటి", "మీరు ఎవరు", "మీ పేరు దయచేసి", "గుడ్ మార్నింగ్", "గుడ్ మధ్యాహ్నం", "గుడ్ నైట్", "బై", "స్వాగతం", "ఎలా ఉన్నారు", "ఏదో చెప్పు", "నేను బాగున్నాను", "నాకు తెలియదు", "నేను నిన్ను ప్రేమిస్తున్నాను", "దయచేసి", "వీడ్కోలు", " తరువాత కలుద్దాం", "నాకు ఒక జోక్ చెప్పండి", "ఎందుకు కాదు", "మీరు ఎక్కడ నుండి వచ్చారు", "సరే", "అవును", "బాగుంది", "సరే", "బాగుంది", "సంతోషం"],
+            ["merhaba", "hey", "merhaba", "teşekkür ederim", "adın ne", "sen kimsin", "adın lütfen", "günaydın", "iyi günler", "iyi geceler", "hoşçakal", "hoşgeldin", "nasılsın", "bir şey söyle", "iyiyim", "bilmiyorum", "seni seviyorum", "lütfen", "hoşçakal", " sonra görüşürüz", "bana fıkra anlat", "neden olmasın", "nerelisin", "tamam", "evet", "güzel", "tamam", "iyi", "mutlu"],
+            ["привіт", "привіт", "привіт", "дякую", "як тебе звати", "хто ти", "будь ласка", "доброго ранку", "доброго дня", "на добраніч", "до побачення", "ласкаво просимо", "як справи", "скажи щось", "у мене все добре", "я не знаю", "я люблю тебе", "будь ласка", "до побачення", " побачимося пізніше", "розкажи мені анекдот", "чому б ні", "звідки ти", "добре", "так", "гарно", "добре", "добре", "щасливий"],
+            ["salom", "hey", "salom", "rahmat", "ismingiz nima", "kimsiz", "ismingiz, iltimos", "xayrli tong", "xayrli kun", "xayrli tun", "xayr", "xush kelibsiz", "yaxshimisiz", "bir narsa ayt", "men yaxshiman", "bilmayman", "men seni sevaman", "iltimos", "xayr", " ko'rishguncha", "hazil ayting", "nega yo'q", "qayerdansan", "yaxshi", "ha", "yaxshi", "yaxshi", "yaxshi", "baxtli"],
+            ["hii", "này", "xin chào", "cảm ơn", "tên bạn là gì", "bạn là ai", "tên bạn làm ơn", "chào buổi sáng", "buổi chiều tốt", "chúc ngủ ngon "," tạm biệt "," chào mừng "," bạn khỏe không "," nói điều gì đó "," tôi ổn "," tôi không biết "," tôi yêu bạn "," làm ơn "," tạm biệt "," hẹn gặp lại sau "," kể chuyện cười cho tôi nghe "," tại sao không "," bạn đến từ đâu "," ổn "," vâng "," tốt "," ok "," tốt "," hạnh phúc "],
+            ["hii", "hei", "helo", "diolch", "beth yw eich enw", "pwy wyt ti", "eich enw plis", "bore da", "prynhawn da", "nos da ", "hwyl", "croeso", "sut wyt ti", "dweud rhywbeth", "Rwy'n iawn", "Dydw i ddim yn gwybod", "Rwy'n caru chi", "os gwelwch yn dda", "hwyl fawr", " gweld chi nes ymlaen", "dywedwch jôc wrthyf", "pam lai", "o ble wyt ti'n dod", "iawn", "ie", "neis", "iawn", "da", "hapus"],
+            ["hii", "hey", "Pẹlẹ o", "o seun", "kini oruko re", "ta ni iwo", "oruko re jowo", "kaaro", "e ku osan", "o ku ale ", "bye", "kaabo", "bawo ni o ṣe ṣe", "sọ nkankan", "Mo dara", "mi ko mọ", "Mo nifẹ rẹ", "jọwọ", "o dabọ", " a ri e", "so fun mi awada", "kilode ti ko se", "nibo ni o ti wa", "dara", "bẹẹni", "dara", "o dara", "dara", "ayọ"],
+            ["lokhu", "hey", "sawubona", "ngiyabonga", "ungubani igama lakho", "ungubani", "igama lakho ngicela", "sawubona", "sawubona ntambama", "ubusuku obuhle ", "sala kahle", "wamukelekile", "unjani", "sho okuthile", "ngiyaphila", "angazi", "ngiyakuthanda", "ngicela", "usale kahle", " sobonana", "ngitshele ihlaya", "kungani", "uvelaphi", "kulungile", "yebo", "kuhle", "kulungile", "kuhle", "ujabule"]
+        ];
+        var x = + selectedLanguage;
+        var size = dictonary[0].length;
+        var flag = 0;
+        for(let i = 0; i < size; ++i){
+            if(en[i] == input){
+                output.innerHTML = dictonary[x][i];
+                flag = 1;
+                break;
+            }
+            if(!flag) output.innerHTML = "";
+        }
+    }
+</script>
+
+</html>
